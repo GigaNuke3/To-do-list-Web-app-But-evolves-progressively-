@@ -4,33 +4,56 @@
 
     <h1>My Todos</h1>
 
-    <ul style="list-style:none; padding:0;">
+    {{-- ADD TODO FORM --}}
+    <form method="POST" action="{{ route('todos.store') }}" class="todo-form">
+        @csrf
+        <input
+            type="text"
+            name="title"
+            value="{{ old('title') }}"
+            placeholder="What needs to be done?"
+        >
+        <button type="submit" class="btn-add">Add</button>
+    </form>
+
+    {{-- VALIDATION ERROR --}}
+    @error('title')
+        <div class="field-error">{{ $message }}</div>
+    @enderror
+
+    {{-- TODO LIST --}}
+    <ul class="todo-list">
         @forelse ($todos as $todo)
-            <li style="
-                background: white;
-                padding: 16px 20px;
-                border-radius: 8px;
-                margin-bottom: 10px;
-                border: 1px solid #e0e0e0;
-                display: flex;
-                align-items: center;
-                gap: 12px;
-            ">
-                {{-- Checkmark if done, empty circle if not --}}
-                @if ($todo->is_done)
-                    <span style="color: #28a745; font-size: 1.2rem;">✔</span>
-                    <span style="text-decoration: line-through; color: #999;">
-                        {{ $todo->title }}
-                    </span>
-                @else
-                    <span style="color: #ccc; font-size: 1.2rem;">○</span>
-                    <span>{{ $todo->title }}</span>
-                @endif
+            <li class="todo-item">
+
+                {{-- TOGGLE COMPLETE --}}
+                <form method="POST" action="{{ route('todos.toggle', $todo) }}">
+                    @csrf
+                    @method('PATCH')
+                    <button type="submit" class="btn-toggle">
+                        {{ $todo->is_done ? '✅' : '⬜' }}
+                    </button>
+                </form>
+
+                {{-- TITLE --}}
+                <span class="todo-title {{ $todo->is_done ? 'done' : '' }}">
+                    {{ $todo->title }}
+                </span>
+
+                {{-- DELETE --}}
+                <form method="POST" action="{{ route('todos.destroy', $todo) }}">
+                    @csrf
+                    @method('DELETE')
+                    <button
+                        type="submit"
+                        class="btn-delete"
+                        onclick="return confirm('Delete this todo?')"
+                    >✕</button>
+                </form>
+
             </li>
         @empty
-            <li style="color: #888; padding: 20px 0;">
-                No todos yet. You'll be able to add some soon!
-            </li>
+            <li class="todo-empty">No todos yet. Add one above!</li>
         @endforelse
     </ul>
 

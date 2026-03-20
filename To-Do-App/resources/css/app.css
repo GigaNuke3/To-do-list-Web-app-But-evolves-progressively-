@@ -1,11 +1,172 @@
-@import 'tailwindcss';
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+/* ── Reset ────────────────────────────────────────────── */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+/* ── Base ─────────────────────────────────────────────── */
+body {
+    font-family: sans-serif;
+    background: #f0f2f5;
+    color: #333;
+    min-height: 100vh;
+    font-family: "JetBrains Mono", monospace;
+    font-optical-sizing: auto;
+}
+
+/* ── Navigation ───────────────────────────────────────── */
+.nav {
+    background: #1a1a2e;
+    color: white;
+    padding: 16px 24px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* ── Container ────────────────────────────────────────── */
+.container {
+    max-width: 700px;
+    margin: 48px auto;
+    padding: 0 20px;
+}
+
+/* ── Page title ───────────────────────────────────────── */
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 24px;
+    color: #1a1a2e;
+}
+
+/* ── Flash messages ───────────────────────────────────── */
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    border: 1px solid #f5c6cb;
+}
+
+/* ── Add todo form ────────────────────────────────────── */
+.todo-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.todo-form input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.todo-form input:focus {
+    border-color: #534AB7;
+}
+
+.btn-add {
+    padding: 10px 20px;
+    background: #534AB7;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-add:hover {
+    background: #3C3489;
+}
+
+/* ── Validation error ─────────────────────────────────── */
+.field-error {
+    color: #721c24;
+    background: #f8d7da;
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    border: 1px solid #f5c6cb;
+    font-size: 0.9rem;
+}
+
+/* ── Todo list ────────────────────────────────────────── */
+.todo-list {
+    list-style: none;
+    padding: 0;
+}
+
+.todo-item {
+    background: white;
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: box-shadow 0.2s;
+}
+
+.todo-item:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* ── Todo toggle button ───────────────────────────────── */
+.btn-toggle {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+
+/* ── Todo title ───────────────────────────────────────── */
+.todo-title {
+    flex: 1;
+    font-size: 1rem;
+}
+
+.todo-title.done {
+    text-decoration: line-through;
+    color: #999;
+}
+
+/* ── Todo delete button ───────────────────────────────── */
+.btn-delete {
+    background: none;
+    border: none;
+    color: #dc3545;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.btn-delete:hover {
+    color: #a71d2a;
+}
+
+/* ── Empty state ──────────────────────────────────────── */
+.todo-empty {
+    color: #888;
+    padding: 20px 0;
 }
