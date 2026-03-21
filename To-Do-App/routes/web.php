@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,3 +15,7 @@ Route::patch('/todos/{todo}/toggle', [TodoController::class, 'toggle'])->name('t
 
 //Delete a todo
 Route::delete('/todos/{todo}', [TodoController::class, 'destroy'])->name('todos.destroy');
+
+//Registration Process
+Route::get('/register', [RegisterController::class, 'create'])->name('register');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
